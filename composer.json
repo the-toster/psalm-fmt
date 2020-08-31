@@ -3,6 +3,7 @@
     "description": "Psalm wrapper that formats console output to fit PhpStorm source link pattern",
     "type": "project",
     "require": {
+        "php": "^7.4",
         "vimeo/psalm": "^3.14",
         "ext-json": "*"
     },

@@ -41,7 +41,7 @@ class Runner
         if (is_null($runFunction)) {
             $result = system($command, $exit_code);
         } else {
-            /** @ var string $result */
+            /** @var string $result */
             $result = $runFunction($command, $exit_code);
         }
 
