@@ -2,21 +2,25 @@
 Add links to files into issues report 
 
 ### How it works
-It just run `psalm --output-format=json` and then turn into slightly modified console format, so PhpStorm can recognize issues filenames as links. 
+It just runs `psalm --output-format=json` and then turn into slightly modified console format, so PhpStorm can recognize issues filenames as links. 
+It also passes additional arguments, so you can use it as `vendor/bin/psalm-fmt file.php`.
+
+### Features
+- respects `-m` or `--monochrome` flag
+- respects `--show-snippet[=true]`
+- bypass output if given `--output-format` is not `console` 
 
 ### Limitation & TODO
-- this version is not pass any additional arguments to `psalm`. Just call `psalm --output-format=json`.
 - isn't suppress json output
-- isn't show stats
+- isn't show stats and other details given by console format
 
 ###Installation
 ```shell script
 composer install the-toster/psalm-fmt
 ```
-
 Will create `vendor/bin/psalm-fmt`
 
 ### Usage
 ```shell script
-psalm-fmt
+vendor/bin/psalm-fmt
 ```

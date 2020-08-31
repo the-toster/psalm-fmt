@@ -3,15 +3,29 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$vendorBin = 'vendor'.DIRECTORY_SEPARATOR.'bin';
 
-if (strpos(getcwd(), $vendorBin) !== false) {
-    $command = 'psalm --output-format=json';
-} else {
-    $command = $vendorBin.DIRECTORY_SEPARATOR.'psalm --output-format=json';
+$options = getopt('m', ['monochrome', 'output-format', 'show-snippet']);
+$config = \PsalmFormatter\Config::fromOptions($options);
+
+$runResult = (new \PsalmFormatter\Runner\Runner(
+    getcwd(),
+    $config->bypass,
+    array_slice($argv, 1)
+))->run();
+
+if ($runResult->bypass) {
+    exit($runResult->exit_code);
 }
 
-$output = system($command);
 
-$issues = ConsoleLinkWrapper\IssueFactory::fromJsonOutput($output);
-echo (new \ConsoleLinkWrapper\ConsoleReport())->create($issues);
+try {
+    $issues = \PsalmFormatter\IssueFactory::fromJsonOutput((string)$runResult->data);
+} catch (JsonException $exception) {
+    echo "Unexpected psalm output, JsonException: {$exception->getMessage()}\n\n";
+    exit(1);
+}
+
+$report = new \PsalmFormatter\Report\Reporter($issues, $config);
+echo $report->report();
+
+exit($runResult->exit_code);

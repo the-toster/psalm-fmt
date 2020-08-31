@@ -3,7 +3,8 @@
     "description": "Psalm wrapper that formats console output to fit PhpStorm source link pattern",
     "type": "project",
     "require": {
-        "vimeo/psalm": "^3.14"
+        "vimeo/psalm": "^3.14",
+        "ext-json": "*"
     },
     "license": "MIT",
     "authors": [
@@ -15,10 +16,18 @@
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "ConsoleLinkWrapper\\": "src/"
+            "PsalmFormatter\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Test\\": "test/"
         }
     },
     "bin": [
         "psalm-fmt"
-    ]
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^9.3"
+    }
 }

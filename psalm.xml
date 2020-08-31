@@ -9,6 +9,7 @@
     <projectFiles>
         <directory name="src" useStrictTypes="true"/>
         <ignoreFiles>
+            <file name="src/IssueFactory.php"/>
             <directory name="vendor" />
         </ignoreFiles>
     </projectFiles>

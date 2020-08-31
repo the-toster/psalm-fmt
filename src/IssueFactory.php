@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace ConsoleLinkWrapper;
+namespace PsalmFormatter;
 
 
 use Psalm\Internal\Analyzer\IssueData;
@@ -14,7 +14,9 @@ class IssueFactory
      */
     public static function fromJsonOutput(string $json): array
     {
-        $data = json_decode($json);
+        /** @var array<\stdClass> $data */
+        $data = json_decode($json, false, 512, JSON_THROW_ON_ERROR);
+        $issues = [];
         foreach ($data as $i) {
             $issues[] = self::fromStdClass($i);
         }

@@ -1,17 +1,27 @@
 <?php
 
-namespace ConsoleLinkWrapper;
+namespace PsalmFormatter\Report;
 
+use Psalm\Internal\Analyzer\IssueData;
 use Psalm\Internal\Analyzer\TaintNodeData;
 use function substr;
 use Psalm\Config;
 
 class ConsoleReport
 {
-    private bool $use_color = true;
-    private bool $show_snippet = true;
+    private bool $use_color;
+    private bool $show_snippet;
 
-    public function create($issues_data): string
+    public function __construct(bool $use_color, bool $show_snippet)
+    {
+        $this->use_color = $use_color;
+        $this->show_snippet = $show_snippet;
+    }
+
+    /**
+     * @param IssueData[] $issues_data
+     */
+    public function create(array $issues_data): string
     {
         $output = '';
         foreach ($issues_data as $issue_data) {
@@ -21,7 +31,7 @@ class ConsoleReport
         return $output;
     }
 
-    private function format(\Psalm\Internal\Analyzer\IssueData $issue_data): string
+    private function format(IssueData $issue_data): string
     {
         $issue_string = '';
 
