@@ -1,5 +1,5 @@
 {
-    "name": "the-toster/psalm-console-link",
+    "name": "the-toster/psalm-fmt",
     "description": "Psalm wrapper that formats console output to fit PhpStorm source link pattern",
     "type": "project",
     "require": {
@@ -17,5 +17,8 @@
         "psr-4": {
             "ConsoleLinkWrapper\\": "src/"
         }
-    }
+    },
+    "bin": [
+        "psalm-fmt"
+    ]
 }
