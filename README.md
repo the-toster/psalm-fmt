@@ -14,7 +14,7 @@ It also passes additional arguments, so you can use it as `vendor/bin/psalm-fmt 
 - isn't suppress json output
 - isn't show stats and other details given by console format
 
-###Installation
+### Installation
 ```shell script
 composer install the-toster/psalm-fmt
 ```
