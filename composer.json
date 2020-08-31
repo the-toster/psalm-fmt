@@ -1,0 +1,21 @@
+{
+    "name": "the-toster/psalm-console-link",
+    "description": "Psalm wrapper that formats console output to fit PhpStorm source link pattern",
+    "type": "project",
+    "require": {
+        "vimeo/psalm": "^3.14"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anton R.",
+            "email": "internetov.ru@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "ConsoleLinkWrapper\\": "src/"
+        }
+    }
+}
