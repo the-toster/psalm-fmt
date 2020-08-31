@@ -1,3 +1,6 @@
+[![Build Status](https://img.shields.io/travis/the-toster/psalm-fmt.svg?style=flat-square)](https://travis-ci.org/the-toster/psalm-fmt)
+![Psalm coverage](https://shepherd.dev/github/the-toster/psalm-fmt/coverage.svg)
+
 # Psalm wrapper for PhpStorm
 Add links to files into issues report 
 
