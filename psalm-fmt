@@ -2,7 +2,7 @@
 <?php
 
 $autoloaderIncluded = false;
-foreach ([__DIR__ .'/../autoload.php', __DIR__ .'/vendor/autoload.php'] as $autoloader) {
+foreach ([__DIR__ .'/../../autoload.php', __DIR__ .'/vendor/autoload.php'] as $autoloader) {
     if(file_exists($autoloader)) {
         $autoloaderIncluded = true;
         require_once $autoloader;
