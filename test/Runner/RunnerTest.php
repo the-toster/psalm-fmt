@@ -9,13 +9,12 @@ use PsalmFormatter\Runner\Runner;
 
 class RunnerTest extends TestCase
 {
-    function testBypass(): void
+    public function testBypass(): void
     {
         $bypass = true;
-        $cwd = '/home/user/project';
         $args = [];
 
-        $runner = new Runner($cwd, $bypass, $args);
+        $runner = new Runner($bypass, $args);
 
         $command = '';
         $result = $runner->run(function ($cmd, &$exit_code) use (&$command){
@@ -29,31 +28,12 @@ class RunnerTest extends TestCase
 
     }
 
-    function testFromBinRun(): void
+    public function testBasic(): void
     {
         $bypass = false;
-        $cwd = implode(DIRECTORY_SEPARATOR, ['home', 'user', 'project', 'vendor', 'bin']);
         $args = [];
 
-        $runner = new Runner($cwd, $bypass, $args);
-
-        $command = '';
-        $result = $runner->run(function ($cmd, &$exit_code) use (&$command){
-            $command = $cmd;
-            $exit_code = 100;
-            return 'res';
-        });
-
-        $this->assertStringNotContainsString('vendor'.DIRECTORY_SEPARATOR.'bin', $command);
-    }
-
-    function testBasic(): void
-    {
-        $bypass = false;
-        $cwd = '/home/user/project';
-        $args = [];
-
-        $runner = new Runner($cwd, $bypass, $args);
+        $runner = new Runner($bypass, $args);
 
         $command = '';
         $result = $runner->run(function ($cmd, &$exit_code) use (&$command){
@@ -66,7 +46,29 @@ class RunnerTest extends TestCase
         $this->assertEquals(false, $result->bypass);
         $this->assertEquals(100, $result->exit_code);
 
-        $this->assertStringContainsString('vendor'.DIRECTORY_SEPARATOR.'bin', $command);
+        $this->assertStringContainsString('vendor'.DIRECTORY_SEPARATOR.'bin'.DIRECTORY_SEPARATOR.'psalm', $command);
         $this->assertStringContainsString('--output-format=json', $command);
+    }
+
+    public function testArgumentPassing(): void
+    {
+        $bypass = false;
+        $args = ['--shepherd', '--long-progress'];
+
+        $runner = new Runner($bypass, $args);
+
+        $command = '';
+        $result = $runner->run(function ($cmd, &$exit_code) use (&$command){
+            $command = $cmd;
+            $exit_code = 100;
+            return 'res';
+        });
+
+        $this->assertEquals('res', $result->data);
+        $this->assertEquals(false, $result->bypass);
+        $this->assertEquals(100, $result->exit_code);
+
+        $this->assertStringContainsString('--shepherd', $command);
+        $this->assertStringContainsString('--long-progress', $command);
     }
 }

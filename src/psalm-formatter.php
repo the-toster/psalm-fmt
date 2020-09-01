@@ -1,14 +1,10 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/../vendor/autoload.php';
-
-
 $options = getopt('m', ['monochrome', 'output-format', 'show-snippet']);
 $config = \PsalmFormatter\Config::fromOptions($options);
 
 $runResult = (new \PsalmFormatter\Runner\Runner(
-    getcwd(),
     $config->bypass,
     array_slice($argv, 1)
 ))->run();
@@ -16,7 +12,6 @@ $runResult = (new \PsalmFormatter\Runner\Runner(
 if ($runResult->bypass) {
     exit($runResult->exit_code);
 }
-
 
 try {
     $issues = \PsalmFormatter\IssueFactory::fromJsonOutput((string)$runResult->data);

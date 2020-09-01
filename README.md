@@ -9,8 +9,8 @@ It just runs `psalm --output-format=json` and then turn into slightly modified c
 It also passes additional arguments, so you can use it as `vendor/bin/psalm-fmt file.php`.
 
 ### Features
-- respects `-m` or `--monochrome` flag
-- respects `--show-snippet[=true]`
+- respects `-m`, `--monochrome`, `--show-snippet[=true]` flags
+- pass back `psalm` exit code
 - bypass output if given `--output-format` is not `console` 
 
 ### Limitation & TODO

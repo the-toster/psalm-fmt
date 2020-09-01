@@ -6,26 +6,18 @@ namespace PsalmFormatter\Runner;
 
 class Runner
 {
-    private const VENDOR_BIN = 'vendor' . DIRECTORY_SEPARATOR . 'bin';
+    private const COMMAND = 'vendor' . DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'psalm';
 
-
-    private string $cwd;
     private bool $bypass;
 
     /** @var array<string> $arguments */
     private array $arguments;
 
     /** @param array<string> $arguments */
-    public function __construct(string $cwd, bool $bypass, array $arguments)
+    public function __construct(bool $bypass, array $arguments)
     {
-        $this->cwd = $cwd;
         $this->bypass = $bypass;
         $this->arguments = $arguments;
-    }
-
-    private function isRunAsBin(): bool
-    {
-        return strpos($this->cwd, self::VENDOR_BIN) !== false;
     }
 
     public function run(?callable $runFunction = null): RunResult
@@ -35,8 +27,7 @@ class Runner
             $arguments[] = '--output-format=json';
         }
 
-        $prefix = $this->isRunAsBin() ? '' : (self::VENDOR_BIN . DIRECTORY_SEPARATOR);
-        $command = $prefix . 'psalm ' . implode(' ', $arguments);
+        $command = self::COMMAND .' '.implode(' ', $arguments);
         $exit_code = 0;
         if (is_null($runFunction)) {
             $result = system($command, $exit_code);
