@@ -3,10 +3,10 @@
 
 # Psalm wrapper for PhpStorm
 Add links to files into issues report  
-before: 
+before:  
 ![before](docs/that_one.jpg)
-
-after: 
+  
+after:  
 ![after](docs/becomes_to.jpg)
 ### How it works
 It just runs `psalm --output-format=json` and then turn into slightly modified console format, so PhpStorm can recognize issues filenames as links. 
