@@ -2,8 +2,12 @@
 ![Psalm coverage](https://shepherd.dev/github/the-toster/psalm-fmt/coverage.svg)
 
 # Psalm wrapper for PhpStorm
-Add links to files into issues report 
+Add links to files into issues report  
+before: 
+![before](docs/that_one.jpg)
 
+after: 
+![after](docs/becomes_to.jpg)
 ### How it works
 It just runs `psalm --output-format=json` and then turn into slightly modified console format, so PhpStorm can recognize issues filenames as links. 
 It also passes additional arguments, so you can use it as `vendor/bin/psalm-fmt file.php`.
@@ -13,13 +17,14 @@ It also passes additional arguments, so you can use it as `vendor/bin/psalm-fmt 
 - pass back `psalm` exit code
 - bypass output if given `--output-format` is not `console` 
 
-### Limitation & TODO
+### Limitation | TODO
 - isn't suppress json output
 - isn't show stats and other details given by console format
+- provide formatter customisation
 
 ### Installation
 ```shell script
-composer install the-toster/psalm-fmt
+composer require --dev the-toster/psalm-fmt
 ```
 Will create `vendor/bin/psalm-fmt`
 
